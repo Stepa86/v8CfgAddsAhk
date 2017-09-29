@@ -386,3 +386,7 @@ actionTextWinExt() {
 	; MsgBox go
 	RunWait, system\OneScript\bin\woscript.exe scripts\WinExtTest.os,,
 }
+
+actionManager2() {
+	RunWait, system\OneScript\bin\woscript.exe scripts\МенеджерСкриптов2.os,,	
+}

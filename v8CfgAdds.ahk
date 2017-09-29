@@ -194,3 +194,9 @@ return
 #sc1F::
 	actionResultSearchFilter()
 return
+
+
+; Ctrl + shift + i - менеджер 2
+^+sc17:: 
+	actionManager2()
+return
