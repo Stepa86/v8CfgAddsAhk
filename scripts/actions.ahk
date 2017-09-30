@@ -149,7 +149,7 @@ actionShowCodeGenerator() {
 }
 
 actionShowPreprocMethod() {
-	RunWait, system\OneScript\bin\woscript.exe scripts\РаботаСТекстом.os ВыбратьПрепроцессор,,
+	RunWait, system\OneScript\bin\woscript.exe scripts\РаботаСТекстом.os Действие ВыбратьПрепроцессор,,
 }
 
 actionShowSimpleMetaSearch() {
@@ -278,7 +278,7 @@ actionGoToPrevContainedWord() {
 	clipboard =
 
 	SendInput ^+{left}^{ins}{right}
-	RunWait, system\OneScript\bin\woscript.exe scripts\РаботаСоСловами.os prev,,
+	RunWait, system\OneScript\bin\woscript.exe scripts\РаботаСоСловами.os Действие НачалоСлова,,
 }
 
 actionGoToNextContainedWord() {
@@ -286,7 +286,7 @@ actionGoToNextContainedWord() {
 	clipboard =
 
 	SendInput ^+{right}^{ins}{left}
-	RunWait, system\OneScript\bin\woscript.exe scripts\РаботаСоСловами.os next,,
+	RunWait, system\OneScript\bin\woscript.exe scripts\РаботаСоСловами.os Действие КонецСлова,,
 }
 
 actionShowMethodName() {
