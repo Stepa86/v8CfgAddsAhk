@@ -1,5 +1,3 @@
-; #include Clipboard_rus_subs.ahk
-
 #include core\KeyCodes.ahk
 #include core\WorkWithModule.ahk
 #include core\WorkWithWindows.ahk
@@ -56,15 +54,6 @@ Ctrl_Shift_Z = ^+{SC02C}
 ; Ctrl + i - Развернуть модуль: 
 ^sc17:: SendInput, ^+{NumpadAdd}
 
-; Ctrl+y - удаление строки
-; $^SC015:: SendInput %Ctrl_L%
-
-; Ctrl-, - символ '<'
-$^,:: SendInput <
-
-; Ctrl-. символ '>'
-$^.:: SendInput >
-
 ; Ctrl-\ символ '|'
 $^\:: SendInput |
 
@@ -74,8 +63,8 @@ $!SC01A::Send [
 ; Alt + ] - символ ']'
 $!SC01B::Send ] 
 
-; Ctrl - & - символ '&'
-$^SC008::Send &
+; Alt - & - символ '&'
+$!SC008::Send &
 
 ; Ctrl + D - Копирование текущей строки/ выделенного блока и вставка ниже
 ^sc20:: SendInput, {CTRLDOWN}{INS}{CTRLUP}{Right}{HOME}{HOME}{SHIFTDOWN}{INS}{SHIFTUP}
@@ -88,9 +77,6 @@ $^SC008::Send &
 !sc20:: actionRunAuthorComments("del") ; alt+d - блок удален
 ; КОНЕЦ авторские комментарии
 ; ----------------------------------------
-
-;Закрытие окна сообщение Ctrl+z (не всем нравится)
-;$^SC02C::SendInput %Ctrl_Shift_Z%
 
 ;-----------------------------------
 ; переходы по процедурам в стиле OpenConf
@@ -106,14 +92,8 @@ return
 return
 ;------------------------------------
 
-; Alt+h - добавление ссылки на реквизит в модуле
-;!sc23:: actionRunLinksToItems()
-
-; Alt+g - Вызов генераторов кода
-; !sc22:: actionShowCodeGenerator()
-
-; Alt+7 - Препроцессор функции
-!SC008:: actionShowPreprocMethod()
+; Ctrl+7 - Препроцессор функции
+^SC008:: actionShowPreprocMethod()
 
 ;------------------------------------
 ; Навигация по метаданным
@@ -165,7 +145,7 @@ Return
 
 ; ----------------------------------
 ; Ctrl + 0 Запуск 1script
-!0:: actionTextWinExt() ;actionRun1Script()
+^0:: actionTextWinExt() ;actionRun1Script()
 
 ; -----------------------------------
 ; Перейти к началу слова в составной строке
@@ -213,4 +193,10 @@ return
 ; Win + S - Фильтрация результатов поиска
 #sc1F::
 	actionResultSearchFilter()
+return
+
+
+; Ctrl + shift + i - менеджер 2
+^+sc17:: 
+	actionManager2()
 return
