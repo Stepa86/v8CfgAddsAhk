@@ -20,7 +20,7 @@ Ctrl_Shift_Z = ^+{SC02C}
 ^3:: actionShowExtFilesList()
 
 ; Ctrl + Shift + m - Прочие скрипты
-~^+sc32:: actionShowScriptManager()
+^+sc32:: actionShowScriptManager()
 
 ; Ctrl + w Выбор ранее набранного слова
 ^sc11:: actionShowPrevWords()
@@ -54,8 +54,8 @@ Ctrl_Shift_Z = ^+{SC02C}
 ; Ctrl + i - Развернуть модуль: 
 ^sc17:: SendInput, ^+{NumpadAdd}
 
-; Alt-\ символ '|'
-$!\:: SendInput |
+; Ctrl-\ символ '|'
+$^\:: SendInput |
 
 ; Alt - [ - символ '['
 $!SC01A::Send [ 
@@ -65,12 +65,6 @@ $!SC01B::Send ]
 
 ; Alt - & - символ '&'
 $!SC008::Send &
-
-; Alt - < - символ '<'
-$!sc33::Send <
-
-; Alt - > - символ '>'
-$!sc34::Send >
 
 ; Ctrl + D - Копирование текущей строки/ выделенного блока и вставка ниже
 ^sc20:: SendInput, {CTRLDOWN}{INS}{CTRLUP}{Right}{HOME}{HOME}{SHIFTDOWN}{INS}{SHIFTUP}
@@ -125,7 +119,7 @@ Return
 Return
 
 ::+=:: 
-	actionIncrements("+=")
+	actionIncrements("-=")
 Return
 
 ::-=:: 
@@ -196,20 +190,6 @@ return
 	actionResultSearchFilter()
 return
 
-<<<<<<< HEAD:v8CfgAdds.ahk
-
-; Ctrl + shift + i - менеджер 2
-^+sc17:: 
-	actionManager2()
-return
-=======
-; Shift + Enter - продолжить строку
 +Enter::
 	actionContinueRow()
 Return
-
-; Ctrl + Shift + Q - выбор шаблона
-~^+sc10::
-	actionChoiceTemplate()
-Return
->>>>>>> 33534b0640816f8e967b99f6b0f498a1a4293b6c:SmartConfigurator.ahk

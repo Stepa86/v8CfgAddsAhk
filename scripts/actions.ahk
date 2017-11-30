@@ -1,9 +1,35 @@
 actionShowMethodsList() {
+	Global
+
 	RunWait, system\OneScript\bin\woscript.exe scripts\Навигация\НавигацияПоМодулю.os СписокМетодов
+	if (ErrorLevel = 0) {
+		return
+	}
+
+	nStr := ErrorLevel
+	SendInput ^%KeyG%
+	WinWait, Перейти по номеру строки
+	SendInput, %nStr%{ENTER}
+
+	SendInput, {home}
+	SendInput, ^{NumpadAdd}
 }
 
 actionShowRegionsList() {
-	RunWait, system\OneScript\bin\woscript.exe scripts\Навигация\НавигацияПоМодулю.os СписокОбластей
+	Global
+
+	RunWait, system\OneScript\bin\woscript.exe scripts\Навигация\НавигацияПоМодулю.os СписокОбластей,,Hide
+	if (ErrorLevel = 0) {
+		return
+	}
+
+	nStr := ErrorLevel
+	SendInput, ^%KeyG%
+	WinWait, Перейти по номеру строки
+	SendInput, %nStr%{ENTER}
+
+	SendInput, {home}
+	SendInput, ^{NumpadAdd}
 }
 
 actionShowExtFilesList() {
@@ -36,15 +62,30 @@ actionShowPrevWords() {
 actionGotoMethodBegin() {
 	Global
 
-	getTextUpWithCurRow()
-	RunWait, system\OneScript\bin\woscript.exe scripts\Навигация\НавигацияПоМодулю.os НачалоМетода
+	getTextUp()
+	RunWait, system\OneScript\bin\woscript.exe scripts\Навигация\НавигацияПоМодулю.os НачалоМетода,,Hide
+	if (ErrorLevel > 0) {
+		nStr := ErrorLevel
+		SendInput, {CtrlDown}%KeyG%{CtrlUp}
+		WinWait, Перейти по номеру строки
+		SendInput,%nStr%{ENTER}
+	}   
+	SendInput, {home}
 }
 
 actionGotoMethodEnd() {
 	Global
 
-	getTextUpWithCurRow()
-	RunWait, system\OneScript\bin\woscript.exe scripts\Навигация\НавигацияПоМодулю.os КонецМетода
+	getTextUp()
+	RunWait, system\OneScript\bin\woscript.exe scripts\Навигация\НавигацияПоМодулю.os НачалоМетода,,Hide
+	if (ErrorLevel > 0) {
+		nStr := ErrorLevel
+		SendInput ^%KeyG%
+		WinWait, Перейти по номеру строки
+		SendInput %nStr%{ENTER}
+		SendInput ^{SC01A}
+	}   
+	SendInput, {home}
 }
 
 actionShowRegExSearch() {
@@ -97,7 +138,7 @@ actionRunAuthorComments(data) {
 }
 
 actionShowPreprocMethod() {
-	RunWait, system\OneScript\bin\woscript.exe scripts\РаботаСТекстом.os Действие ВыбратьПрепроцессор,,
+	RunWait, system\OneScript\bin\woscript.exe scripts\РаботаСТекстом.os ВыбратьПрепроцессор,,
 }
 
 actionShowSimpleMetaSearch() {
@@ -226,7 +267,7 @@ actionGoToPrevContainedWord() {
 	clipboard =
 
 	SendInput ^+{left}^{ins}{right}
-	RunWait, system\OneScript\bin\woscript.exe scripts\РаботаСоСловами.os Действие НачалоСлова,,
+	RunWait, system\OneScript\bin\woscript.exe scripts\РаботаСоСловами.os prev,,
 }
 
 actionGoToNextContainedWord() {
@@ -234,7 +275,7 @@ actionGoToNextContainedWord() {
 	clipboard =
 
 	SendInput ^+{right}^{ins}{left}
-	RunWait, system\OneScript\bin\woscript.exe scripts\РаботаСоСловами.os Действие КонецСлова,,
+	RunWait, system\OneScript\bin\woscript.exe scripts\РаботаСоСловами.os next,,
 }
 
 actionShowMethodName() {
@@ -328,18 +369,4 @@ actionIncrements(kind) {
 	SendInput, ^{ins}
 	ClipWait
 	RunWait, system\OneScript\bin\woscript.exe scripts\РаботаСТекстом.os Инкремент %kind%
-}
-
-<<<<<<< HEAD
-actionTextWinExt() {
-	; MsgBox go
-	RunWait, system\OneScript\bin\woscript.exe scripts\WinExtTest.os,,
-}
-
-actionManager2() {
-	RunWait, system\OneScript\bin\woscript.exe scripts\МенеджерСкриптов2.os,,	
-=======
-actionChoiceTemplate() {
-	RunWait, system\OneScript\bin\woscript.exe scripts\РаботаСТекстом.os ВыбратьШаблон
->>>>>>> 33534b0640816f8e967b99f6b0f498a1a4293b6c
 }

@@ -122,9 +122,6 @@ function actionGoToType(lStrings) {
 			StrToChoice +=  "("+UpCount+") "+ lStr + "\r\n";
 		}
 	}
-
-	// wtiteToResultFile("tmp/log-met-nav.txt", StrToChoice);
-
 	if (UpCount == 1) {
 		WScript.Quit(1);
 	} else if (UpCount == 0) {
