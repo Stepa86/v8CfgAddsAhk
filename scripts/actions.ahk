@@ -1,35 +1,9 @@
 actionShowMethodsList() {
-	Global
-
 	RunWait, system\OneScript\bin\woscript.exe scripts\Навигация\НавигацияПоМодулю.os СписокМетодов
-	if (ErrorLevel = 0) {
-		return
-	}
-
-	nStr := ErrorLevel
-	SendInput ^%KeyG%
-	WinWait, Перейти по номеру строки
-	SendInput, %nStr%{ENTER}
-
-	SendInput, {home}
-	SendInput, ^{NumpadAdd}
 }
 
 actionShowRegionsList() {
-	Global
-
-	RunWait, system\OneScript\bin\woscript.exe scripts\Навигация\НавигацияПоМодулю.os СписокОбластей,,Hide
-	if (ErrorLevel = 0) {
-		return
-	}
-
-	nStr := ErrorLevel
-	SendInput, ^%KeyG%
-	WinWait, Перейти по номеру строки
-	SendInput, %nStr%{ENTER}
-
-	SendInput, {home}
-	SendInput, ^{NumpadAdd}
+	RunWait, system\OneScript\bin\woscript.exe scripts\Навигация\НавигацияПоМодулю.os СписокОбластей
 }
 
 actionShowExtFilesList() {
@@ -45,7 +19,7 @@ actionShowExtFilesList() {
 		set_locale_ru()
 		SendInput, !%KeyA%
 		SendInput, {DOWN}{DOWN}{Enter}
-		WinWait, Открытие
+		WinWait, Открыть
 		SendInput, ^%KeyV%{Enter}
 	}
 }
@@ -62,30 +36,15 @@ actionShowPrevWords() {
 actionGotoMethodBegin() {
 	Global
 
-	getTextUp()
-	RunWait, system\OneScript\bin\woscript.exe scripts\Навигация\НавигацияПоМодулю.os НачалоМетода,,Hide
-	if (ErrorLevel > 0) {
-		nStr := ErrorLevel
-		SendInput, {CtrlDown}%KeyG%{CtrlUp}
-		WinWait, Перейти по номеру строки
-		SendInput,%nStr%{ENTER}
-	}   
-	SendInput, {home}
+	getTextUpWithCurRow()
+	RunWait, system\OneScript\bin\woscript.exe scripts\Навигация\НавигацияПоМодулю.os НачалоМетода
 }
 
 actionGotoMethodEnd() {
 	Global
 
-	getTextUp()
-	RunWait, system\OneScript\bin\woscript.exe scripts\Навигация\НавигацияПоМодулю.os НачалоМетода,,Hide
-	if (ErrorLevel > 0) {
-		nStr := ErrorLevel
-		SendInput ^%KeyG%
-		WinWait, Перейти по номеру строки
-		SendInput %nStr%{ENTER}
-		SendInput ^{SC01A}
-	}   
-	SendInput, {home}
+	getTextUpWithCurRow()
+	RunWait, system\OneScript\bin\woscript.exe scripts\Навигация\НавигацияПоМодулю.os КонецМетода
 }
 
 actionShowRegExSearch() {
@@ -135,17 +94,6 @@ actionShowLastSelect() {
 
 actionRunAuthorComments(data) {
 	RunWait, system\OneScript\bin\oscript.exe scripts\АвторскиеКомментарии.os %data%,,hide
-}
-
-actionRunLinksToItems() {
-	putSelectionInFile()
-	RunWait, wscript scripts\generator.js null simple-managment
-	pasteTextFromFile()
-}
-
-actionShowCodeGenerator() {
-	RunWait, wscript scripts\generator.js null generator
-	pasteTextFromFile()	
 }
 
 actionShowPreprocMethod() {
@@ -297,23 +245,11 @@ actionShowMethodName() {
 
 }
 
-actionGenerateServerMethodFromCurMethod() {
-	Global
-
-	getTextUp()
-	RunWait, system\OneScript\bin\oscript.exe scripts\Навигация\НавигацияПоМодулю.os СоздатьСерверныйМетод,,Hide
-
-}
-
 actionOneStyleSelection() {
     ; отформатируем выделение средствами 1С, т.к. у только выделенного блока недостаточно информации об отступах
     global
     SendInput, !+%KeyF%
-	fileName:="scripts\OneStyle\module.txt"
-    putSelectionInFile( fileName )
-    RunWait, system\OneScript\bin\oscript.exe scripts\OneStyle\Main.os %fileName%,,Hide
-    pasteTextFromFile( fileName, 2 )
-	FileDelete %fileName%
+	RunWait, system\OneScript\bin\woscript.exe scripts\OneStyle\Main.os,,Hide
 }
 
 actionWindowsManager() {
@@ -381,7 +317,20 @@ actionResultSearchFilter() {
 
 }
 
+actionContinueRow() {
+	SendInput, {SHIFTDOWN}{up}{up}{up}{SHIFTUP}^{Insert}
+	ClipWait
+	SendInput, {Right}
+	RunWait, system\OneScript\bin\woscript.exe scripts\РаботаСТекстом.os ПродолжитьСтрокуКомментарий
+}
 
+actionIncrements(kind) {
+	SendInput, ^{ins}
+	ClipWait
+	RunWait, system\OneScript\bin\woscript.exe scripts\РаботаСТекстом.os Инкремент %kind%
+}
+
+<<<<<<< HEAD
 actionTextWinExt() {
 	; MsgBox go
 	RunWait, system\OneScript\bin\woscript.exe scripts\WinExtTest.os,,
@@ -389,4 +338,8 @@ actionTextWinExt() {
 
 actionManager2() {
 	RunWait, system\OneScript\bin\woscript.exe scripts\МенеджерСкриптов2.os,,	
+=======
+actionChoiceTemplate() {
+	RunWait, system\OneScript\bin\woscript.exe scripts\РаботаСТекстом.os ВыбратьШаблон
+>>>>>>> 33534b0640816f8e967b99f6b0f498a1a4293b6c
 }
