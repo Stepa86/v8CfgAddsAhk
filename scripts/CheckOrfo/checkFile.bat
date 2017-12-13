@@ -1,0 +1,1 @@
+java -Dfile.encoding=UTF-8 -jar LanguageTool-3.9/languagetool-commandline.jar --autoDetect --json --line-by-line G:\GIT_Repo\GITHUB\Forks\v8CfgAddsAhk\tmp\in.txt>G:\GIT_Repo\GITHUB\Forks\v8CfgAddsAhk\tmp\out.json
