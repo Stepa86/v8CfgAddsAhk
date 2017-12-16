@@ -1,5 +1,9 @@
 {
 
-    "debug": true
+    "debug": true,
+
+    // Путь к файлу languagetool-commandline.jar
+    // Библиотеку нужно предварительно скачать с https://languagetool.org/download/LanguageTool-stable.zip
+    "LanguageTool.path": "G:\\GIT_Repo\\GITHUB\\Forks\\v8CfgAddsAhk\\scripts\\CheckOrfo\\LanguageTool-3.9\\languagetool-commandline.jar"
 
 }
