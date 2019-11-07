@@ -16,20 +16,13 @@ actionShowScriptManager() {
 
 actionShowPrevWords() {
 	RunWait, system\OneScript\bin\woscript.exe scripts\Навигация\НавигацияПоМодулю.os allwords,,
-	pasteTextFromFile()
 }
 
 actionGotoMethodBegin() {
-	Global
-
-	getTextUpWithCurRow()
 	RunWait, system\OneScript\bin\woscript.exe scripts\Навигация\НавигацияПоМодулю.os НачалоМетода
 }
 
 actionGotoMethodEnd() {
-	Global
-
-	getTextUpWithCurRow()
 	RunWait, system\OneScript\bin\woscript.exe scripts\Навигация\НавигацияПоМодулю.os КонецМетода
 }
 
@@ -43,8 +36,9 @@ actionShowRegExSearch() {
 		SendInput ^%KeyG%
 		WinWait, Перейти по номеру строки
 		SendInput %nStr%{ENTER}
+		SendInput, {home}
 	}   
-	SendInput, {home}
+	
 }
 
 actionShowRegExSearchLastResult() {
@@ -57,8 +51,8 @@ actionShowRegExSearchLastResult() {
 		SendInput ^%KeyG%
 		WinWait, Перейти по номеру строки
 		SendInput %nStr%{ENTER}
+		SendInput, {home}
 	}   
-	SendInput, {home}
 }
 
 actionShowLastSelect() {
@@ -72,9 +66,9 @@ actionShowLastSelect() {
 		SendInput ^%KeyG%
 		WinWait, Перейти по номеру строки
 		SendInput %nStr%{ENTER}
+		SendInput, {home}
+		SendInput, ^{NumpadAdd}
 	}   
-	SendInput, {home}
-	SendInput, ^{NumpadAdd}
 }
 
 
@@ -224,9 +218,9 @@ actionGoToNextContainedWord() {
 }
 
 actionShowMethodName() {
-	Global
+	; Global
 
-	getTextUp()
+	; getTextUp()
 	RunWait, system\OneScript\bin\woscript.exe scripts\Навигация\НавигацияПоМодулю.os ИмяМетода,,
 
 }
@@ -311,11 +305,25 @@ actionContinueRow() {
 }
 
 actionIncrements(kind) {
-	SendInput, ^{ins}
-	ClipWait
+	; SendInput, ^{ins}
+	; ClipWait
 	RunWait, system\OneScript\bin\woscript.exe scripts\РаботаСТекстом.os Инкремент %kind%
 }
 
 actionChoiceTemplate() {
 	RunWait, system\OneScript\bin\woscript.exe scripts\РаботаСТекстом.os ВыбратьШаблон
+}
+
+actionOpenObjectModuleExternal() {
+	Global
+	SendInput, {CtrlUp}
+	SendInput, {CtrlDown}%KeyT%{CtrlUp}
+	SendInput, {Tab}{Enter}{down}{Enter}
+}
+
+actionOpenMainFormExternal() {
+	Global
+	SendInput, {CtrlUp}
+	SendInput, {CtrlDown}%KeyT%{CtrlUp}
+	SendInput, {Tab}{Enter}{down}{down}{Enter}
 }
