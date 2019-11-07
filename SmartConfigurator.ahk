@@ -52,7 +52,7 @@ Ctrl_Shift_Z = ^+{SC02C}
 ^/:: Send, {home}//
 
 ; Ctrl + i - Развернуть модуль: 
-^sc17:: SendInput, ^+{NumpadAdd}
+;^sc17:: SendInput, ^+{NumpadAdd}
 
 ; Alt-\ символ '|'
 $!\:: SendInput |
